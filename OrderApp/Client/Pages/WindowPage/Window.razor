@@ -1,0 +1,45 @@
+﻿@page "/Window"
+@inherits WindowBase
+
+@if (Windows == null)
+{
+    <h3>Loading Windows.......</h3>
+}
+else
+{
+    <h3 class="mb-5">Windows</h3>
+    var WindowCount = Windows.Count();
+    @if (WindowCount > 0)
+    {
+        var windowsRowList = new List<WindowDto>();
+
+        windowsRowList = Windows.ToList();
+        <table class="table table-responsive table-bordered table-striped table-hover align-content-center">
+            <thead>
+                <tr>
+                    <th>Window Name</th>
+                    <th>Order Name</th>
+                    <th>Quantity Of Windows</th>
+                    <th>Total SubElements</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var window in windowsRowList)
+                {
+                    <tr>
+                        <td>@window.WindowName</td>
+                        <td>@window.Name</td>
+                        <td>@window.QuantityOfWindows</td>
+                        <td>@window.TotalSubElements</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="(()=>ShowWindow(window.WindowID,window.OrderId))"><i class="oi oi-pencil"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button class="btn btn-primary" @onclick="CreateNewWindow">Create New Window</button>
+
+    }
+}

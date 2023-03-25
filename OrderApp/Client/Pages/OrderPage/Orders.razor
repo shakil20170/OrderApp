@@ -1,0 +1,41 @@
+﻿@page "/"
+@inherits OrdersBase
+
+@if (Orders == null)
+{
+    <h3>Loading Orders.......</h3>
+}
+else
+{
+    <h3 class="mb-5">Orders</h3>
+    var OrderCount = Orders.Count();
+    @if (OrderCount > 0)
+    {
+        var orderRowList = new List<OrderDto>();
+
+        orderRowList = Orders.ToList();
+        <table class="table table-responsive table-bordered table-striped table-hover align-content-center">
+            <thead>
+                <tr>
+                    <th>Order Name</th>
+                    <th>State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in orderRowList)
+                {
+                    <tr>
+                        <td>@order.Name</td>
+                        <td>@order.State</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="(()=>ShowOrder(order.OrderId))"><i class="oi oi-pencil"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button class="btn btn-primary" @onclick="CreateNewOrder">Create New Order</button>
+
+    }
+}

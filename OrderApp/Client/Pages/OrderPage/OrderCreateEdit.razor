@@ -1,0 +1,40 @@
+﻿@page "/OrderCreateEdit"
+@page "/OrderCreateEdit/{id:int}"
+@inherits OrderCreateEditBase
+
+
+@if (Id == null)
+{
+    <PageTitle>Create a new Order</PageTitle>
+    <h3>Create a new Order</h3>
+}
+else
+{
+    <PageTitle>Edit Order</PageTitle>
+    <h3>Edit Order</h3>
+}
+
+@if (Order != null)
+{
+    <EditForm Model="@Order" OnSubmit="HandleSubmit">
+        <div>
+            <label for="orderName">Order Name</label>
+            <InputText id="orderName" @bind-Value="@Order.Name" class="form-control"></InputText>
+        </div>
+        <div>
+            <label for="state">State</label>
+            <InputText id="state" @bind-Value="@Order.State" class="form-control"></InputText>
+        </div>
+        <br />
+        <div>
+            <button type="submit" class="btn btn-primary">@btnText</button>
+            <button type="button" class="btn btn-danger" @onclick="DeleteOrder">Delete Order</button>
+
+        </div>
+
+    </EditForm>
+}
+
+@code {
+
+}

@@ -1,0 +1,62 @@
+﻿@page "/SubElementCreateEdit"
+@page "/SubElementCreateEdit/{Id:int}"
+@inherits SubElementCreateEditBase
+
+
+@if (Id == null)
+{
+    <PageTitle>Create a new Sub Element</PageTitle>
+    <h3>Create a new Sub Element</h3>
+}
+else
+{
+    <PageTitle>Edit Sub Element</PageTitle>
+    <h3>Edit Sub Element</h3>
+}
+
+@if (SubElementDto != null)
+{
+    <EditForm Model="@SubElementDto" OnSubmit="HandleSubmit">
+        <div>
+            <label for="subElementType">Sub Element Type</label>
+            <InputText id="subElementType" @bind-Value="@SubElementDto.SubElementType" class="form-control"></InputText>
+        </div>
+        @*<div>
+            <label for="windowName">Window Name</label>
+            <InputText id="windowName" @bind-Value="@SubElementDto.WindowName" class="form-control"></InputText>
+        </div>*@
+
+        <div>
+            <label>Window Name</label><br />
+            <InputSelect @bind-Value="SubElementDto.WindowTableWindowID" class="form-select">
+                @foreach (var window in SubElementService.windowListDropdown)
+                {
+                    <option value="@window.WindowID">@window.WindowName</option>
+                }
+            </InputSelect>
+        </div>
+        <div>
+            <label for="element">Element</label>
+            <InputNumber id="element" @bind-Value="@SubElementDto.Element" class="form-control"></InputNumber>
+        </div>
+        <div>
+            <label for="width">Width</label>
+            <InputNumber id="width" @bind-Value="@SubElementDto.Width" class="form-control"></InputNumber>
+        </div>
+        <div>
+            <label for="element">Height</label>
+            <InputNumber id="height" @bind-Value="@SubElementDto.Height" class="form-control"></InputNumber>
+        </div>
+        <br />
+        <div>
+            <button type="submit" class="btn btn-primary">@btnText</button>
+            <button type="button" class="btn btn-danger" @onclick="DeleteSubElement">Delete Sub Element</button>
+
+        </div>
+
+    </EditForm>
+}
+
+@code {
+
+}

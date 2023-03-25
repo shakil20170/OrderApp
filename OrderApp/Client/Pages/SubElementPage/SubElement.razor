@@ -1,0 +1,48 @@
+﻿@page "/SubElement"
+@inherits SubElementBase
+
+@if (SubElementDto == null)
+{
+    <h3>Loading Sub Elements.......</h3>
+}
+else
+{
+    <h3 class="mb-5">Sub Elements</h3>
+    var OrderCount = SubElementDto.Count();
+    @if (OrderCount > 0)
+    {
+        var orderRowList = new List<SubElementDto>();
+
+        orderRowList = SubElementDto.ToList();
+        @*<button class="btn btn-primary" @onclick="(()=>ShowOrder())"><i class="oi oi-pencil"></i></button>*@
+        <table class="table table-responsive table-bordered table-striped table-hover align-content-center">
+            <thead>
+                <tr>
+                    <th>Sub Element Type</th>
+                    <th>Window Name</th>
+                    <th>Element</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subElement in orderRowList)
+                {
+                    <tr>
+                        <td>@subElement.SubElementType</td>
+                        <td>@subElement.WindowName</td>
+                        <td>@subElement.Element</td>
+                        <td>@subElement.Width</td>
+                        <td>@subElement.Height</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="(()=>ShowSubElement(subElement.SubElementID))"><i class="oi oi-pencil"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button class="btn btn-primary" @onclick="CreateNewSubElement">Create New Sub Element</button>
+
+    }
+}
