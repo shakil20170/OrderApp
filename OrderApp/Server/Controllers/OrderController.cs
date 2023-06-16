@@ -7,6 +7,11 @@ using OrderApp.Client.Pages;
 
 namespace OrderApp.Server.Controllers
 {
+
+
+    /// <summary>
+    /// Adding here comments for new changes.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
